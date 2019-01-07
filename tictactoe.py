@@ -30,18 +30,26 @@ def main():
         winner = checkWin(board)
 
     printBoard(board)
-    print("Winner: {}".format(winner))
+    if winner == 'X' or winner == 'O':
+        print("Winner: {}".format(winner))
+    else:
+        print("Tie!")
 
 
 def printBoard(board):
-    print(board[0] + ' | ' + board[1] + ' | ' + board[2])
-    print('----------')
-    print(board[3] + ' | ' + board[4] + ' | ' + board[5])
-    print('----------')
-    print(board[6] + ' | ' + board[7] + ' | ' + board[8])
+    print(board[0] , ' | ' , board[1] , ' | ' , board[2])
+    print('-------------')
+    print(board[3] , ' | ' , board[4] , ' | ' , board[5])
+    print('-------------')
+    print(board[6] , ' | ' , board[7] , ' | ' , board[8])
 
 
 def checkWin(board):
+
+    # if any numbers remain in the board, the game is not over
+    #so, this will be set to false in the loop
+    gameOver = True
+
     lines = [[0, 1, 2],
              [3, 4, 5],
              [6, 7, 8],
@@ -52,10 +60,12 @@ def checkWin(board):
              [2, 4, 6]]
 
     for line in lines:
+        if board[line[0]].isdigit() or board[line[1]].isdigit() or board[line[2]].isdigit():
+            gameOver = False
         if board[line[0]] == board[line[1]] and board[line[1]] == board[line[2]]:
             return board[line[0]]
 
-    return False
+    return gameOver
 
 
 if __name__ == '__main__':
